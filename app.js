@@ -1,80 +1,66 @@
 
+// Import libraries
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
 require('log-timestamp');
 
-var five = require( 'johnny-five' ),board,led;
-board = new five.Board(); 
-   board.on("ready", function() {
-     led = new five.Led(13);
-     console.log("board is ready");
-    });
+// Initalise Johnny-five
+var five = require('johnny-five'), board, led, led2;
 
+// Create a board
+board = new five.Board();
+
+// Set led to pin 13 on ready
+board.on("ready", function () {
+    led = new five.Led(13);
+    led2 = new five.Led(12);
+    console.log("board is ready");
+});
+
+// Boilerplate code
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
- 
-var routes = require("./routes.js")(app);
- 
+
+// set server port
 var server = app.listen(3000, function () {
     console.log("Listening on port %s...", server.address().port);
 });
 
-app.get('/on',function(req,res){
-
-console.log("led on");
- if(board.isReady){ led.on();}
-        console.log("light is turned on");
-    res.redirect('/');  
-});   
-
-//app.get request on /off triggers turning off the LED
-app.get('/off',function(req,res){
-
-console.log("led off");
- if(board.isReady){ led.off();}
-        console.log("light is turned off");
-    res.redirect('/');  
-}); 
-
-
-var state = 'off';
-
-// Headers must be : x-www-form-urlencoded
-// Post example : {state : 0, key : 'test'}
-app.post('/switch', function(req, res){
-
+// ROUTES
+// GET @ / | Home/Index request
+app.get("/", function(req, res) {
+    res.send("Welcome to AR Client server\n use the following endpoints to toggle the LED(s):<br>GET @ /toggle<br>GET @ /:led/toggle | led = 'led' or 'led2'<br>POST @ /switch <br>with body application/json {key:'secretKey'}");
     console.log('Request recieved');
-    console.log(req.body);
+});
 
-    // // Support two states, 1 = on, 0 = off
-    // var state = req.body.state
+// GET request @ /toggle | Toggle all the leds
+app.get('/toggle', function (req, res) {
 
-    // For authentication purposes
-    var key = req.body.key;
-
-    if(key === 'test'){
-
-        if(state === 'on'){
-            state = 'off';
-        }else{
-            state = 'on';
-        }
-
-        if(state === 'on'){
-            console.log("led on");
-            if(board.isReady){ led.on();}
-            console.log("light is turned on"); 
-        }
-
-        if(state === 'off'){
-            console.log("led off");
-            if (board.isReady) { led.off(); }
-            console.log("light is turned off");
-        }
-
+    // Toggle state of both led
+    if (board.isReady){
+        led.toggle();
+        led2.toggle();
     }
 
-    res.end('Switch toggled');
+    console.log("led(s) are toggled");
+    res.redirect('/');
 
+});
+
+// GET request @ /toggle/:led | Toggle given :led
+app.get('/toggle/:led', function (req, res) {
+
+    var ledType = req.params.led;
+
+    // Toggle state of both led
+    if (board.isReady) {
+        if(ledType === 'led'){
+            led.toggle();
+        }else{
+            led2.toggle();
+        }
+    }
+    console.log(ledType + " toggled");
+    res.redirect('/');
 });
