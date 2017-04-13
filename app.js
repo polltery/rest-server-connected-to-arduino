@@ -15,6 +15,7 @@ board = new five.Board();
 board.on("ready", function () {
     led = new five.Led(13);
     led2 = new five.Led(12);
+    led3 = new five.Led(11);
     console.log("board is ready");
 });
 
@@ -62,5 +63,18 @@ app.get('/toggle/:led', function (req, res) {
         }
     }
     console.log(ledType + " toggled");
+    res.redirect('/');
+});
+
+// GET request @ /brightness/:value | Update the brightness of led2 to a given :value (must be between 0-255)
+app.get('/brightness/:value',function(req,res){
+
+    var brightness = req.params.value;
+
+    // Update the brightness of led 2
+    if (board.isReady) {
+        led3.brightness(brightness);
+    }
+    console.log('led2 brightness updated to '+brightness);
     res.redirect('/');
 });
