@@ -30,7 +30,7 @@ var server = app.listen(3000, function () {
 // ROUTES
 // GET @ / | Home/Index request
 app.get("/", function(req, res) {
-    res.send("Welcome to AR Client server\n use the following endpoints to toggle the LED(s):<br>GET @ /toggle<br>GET @ /:led/toggle | led = 'led' or 'led2'<br>POST @ /switch <br>with body application/json {key:'secretKey'}");
+    res.send("Welcome to AR Client server\n use the following endpoints to toggle the LED(s):<br>GET @ /toggle<br>GET @ /:led/toggle | led = 'led' or 'led2'");
     console.log('Request recieved');
 });
 
