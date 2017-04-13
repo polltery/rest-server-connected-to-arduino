@@ -26,7 +26,7 @@ You can now close the Arduino IDE, and clone this project into a folder.
 
 Setup the circuit as given in the diagram below
 
-![Circuit sketch](./ARServer_bb.png)
+![Circuit sketch](./ARServer_bb_v2.png)
 
 Starting up the server
 ---
