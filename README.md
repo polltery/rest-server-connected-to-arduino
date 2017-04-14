@@ -38,6 +38,7 @@ node app.js
 
 The server should now be running, all the logs should displayed in the console.
 
+A web interface is available on `http://localhost:3000/index.html` before using it, please setup the `apiUrl` in `js/interactions.js`
 
 
 *Created by Balraj Singh Bains for 4th Year Honours Dissertation at Heriot Watt University.*
