@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--JQUERY-->
+    <link href="css/ionic.app.min.css" rel="stylesheet" type="text/css">
+    <script src="js/interactions.js"></script>
+</head>
+
+<body>
+
+    <!--list-->
+    <ul class="list">
+
+        <div class="item item-divider">
+            LED Toggle Controls
+        </div>
+
+        <div class="item item-button-right">
+            Toggle both Lights
+            <button class="button button-positive" id="switchBtn">
+    </button>
+        </div>
+
+        <div class="item item-button-right">
+            Green Light
+            <button class="button button-assertive" id="toggleGreenBtn">
+    </button>
+        </div>
+
+        <div class="item item-button-right">
+            Red light
+            <button class="button button-assertive" id="toggleRedBtn">
+    </button>
+        </div>
+
+        <div class="item item-divider">
+            Fan Control
+        </div>
+        <div class="item range range-positive">
+            <p>Slow</p>
+            <input type="range" name="volume" min="0" max="100" value="33" id="brightnessControl">
+            <p>Fast</p>
+        </div>
+    </ul>
+
+    <!--./list-->
+
+
+</body>
+
+</html>

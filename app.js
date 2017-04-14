@@ -5,6 +5,9 @@ var bodyParser = require("body-parser");
 var app = express();
 require('log-timestamp');
 
+// Set static files
+app.use(express.static(__dirname + '/www'));
+
 // Initalise Johnny-five
 var five = require('johnny-five'), board, led, led2;
 
